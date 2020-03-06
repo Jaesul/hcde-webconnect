@@ -3,6 +3,7 @@
 var sketch = function(p) {
 
   // Global var declaration 
+  p.brightnessSlider;
   p.socket;
   p.data;
   p.serial;
@@ -31,7 +32,7 @@ var sketch = function(p) {
     var canvasDiv = document.getElementById('p5-container');
     for (var i = 0; i < 10; i++) {
       p.fill(0, 0, 0);
-      p.rect(canvasDiv.offsetWidth * 5 / 6 + 10, 30 + i * 15, 40, 10);
+      p.rect(10, 10 + i * canvasDiv.offsetHeight / 10 , canvasDiv.offsetWidth - 20, canvasDiv.offsetHeight / 10 - 10, 10);
     }
     p.serial.write(1);
   }
@@ -46,47 +47,28 @@ var sketch = function(p) {
     var canvasDiv = document.getElementById('p5-container');
     p.socket = io.connect.connect('http://localhost:3000/');
     p.createCanvas(canvasDiv.offsetWidth,canvasDiv.offsetHeight);
-    p.socket.on('mouse', p.newDrawing);
-    p.createP('');
-    p.button = p.createButton("Turn Off");
-    console.log(p.button);
-    p.button.mousePressed(p.turnOff);
+    p.background('rgba(255, 186, 0, ' + 0.6 + ')');
+    p.brightnessSlider = p.createSlider(0, 255, 127);
+    p.brightnessSlider.center('horizontal')
+    p.button = p.createButton('Power');
+    p.button.center('horizontal');
   }
 
   // draw the canvas the state of the led's
   p.newDrawing = function(numLights, numbrightness) {
     p.clear();
     var canvasDiv = document.getElementById('p5-container');
-    for (var i = 0; i < numLights; i++) {
-      var colors = p.colors[i];
-      p.fill(colors[0], colors[1], colors[2]);
-      p.rect(i * canvasDiv.offsetWidth / 6, 0, canvasDiv.offsetWidth / 6, canvasDiv.offsetHeight - 100);
-    }
-
-    for (var i = numLights; i < 5; i++) {
-      var colors = p.colors[i];
-      p.fill(0, 0, 0);
-      p.rect(i * canvasDiv.offsetWidth / 6, 0, canvasDiv.offsetWidth / 6, canvasDiv.offsetHeight - 100);
-    }
 
     for (var i = 0; i < numbrightness; i++) {
       p.fill(255,255,0);
-      p.rect(canvasDiv.offsetWidth * 5 / 6 + 10, 30 + i * 15, 40, 10);
+      p.rect(10, 10 + i * canvasDiv.offsetHeight / 10 , canvasDiv.offsetWidth - 20, canvasDiv.offsetHeight / 10 - 10, 10);
     }
 
     for (var i = numbrightness; i < 10; i++) {
       p.fill(0, 0, 0);
-      p.rect(canvasDiv.offsetWidth * 5 / 6 + 10, 30 + i * 15, 40, 10);
+      console.log(canvasDiv.offsetHeight);
+      p.rect(10, 10 + i * canvasDiv.offsetHeight / 10 , canvasDiv.offsetWidth - 20, canvasDiv.offsetHeight / 10 - 10, 10);
     }
-  }
-  
-  // Write the state of the brightness of the led's
-  p.draw = function() {
-    var canvasDiv = document.getElementById('p5-container');
-    p.fill(0,0,0);
-    p.textLeading(100);
-    p.textSize(20);
-    p.text('Brightness', canvasDiv.offsetWidth * 5 / 6 + 10, 15);
   }
 }
 

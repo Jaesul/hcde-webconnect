@@ -7,17 +7,12 @@ html, body {
 }
 
 #p5-container {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 30em;
-    width: 30em;
+    width: 20em;
     border-radius: 5px;
     overflow: hidden;
     position: relative;
-}
-
-#p5-container button{
-    position: absolute;
-    right: 0;
-    bottom: 0;
 }
 
 body { 
@@ -26,28 +21,32 @@ body {
     align-items: center;
 }
 
-
-h1 {
-    width: 100%;
-    text-align: center;
+button {
+	border-radius: 7px;
+	bottom: 10%;
+	border: none;
+	font-size: 1.1em;
+	background: white;
+	color: rgb(78, 78, 78);
+	cursor:pointer;
+	text-decoration:none;
+	position: absolute;
+	padding: .3em .6em;
+	transition: opacity 0.2s ease-in-out;
 }
 
-h3 {
-    font-size: 1em;
-    font-weight: 500;
-    margin-top: .5em;
-    color: rgb(228, 66, 66);
-    transition: opacity 0.2s ease-in-out;
+button:hover {
+	opacity: 0.6;
 }
 
 .login-page {
     position: fixed;
-    display: flex;
+	display: flex;
+	display: none;
     justify-content: center;
     align-content: center;
     height: 100%;
-    width: 100%;
-    background-color: #7C90A0;
+	width: 100%;
     transition: transform 0.8s ease-in-out;
     z-index: 100;
 }
@@ -126,29 +125,44 @@ body {
 	background-color: white;
 }
 
-.submit-btn {
-    background: transparent;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: .8em;
-    cursor: pointer;
-    padding: .5em 0 0 0;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.submit-btn:hover {
-opacity: 0.6;
-}
-
-.submit-btn:focus {outline:0;}
-
 .no-opacity {
-opacity: 0;
+	opacity: 0;
 }
 
 .slide-up {
     transform: translate3d(0, 100%, 0);
+}
+
+input[type=range] {
+	position: absolute;
+	bottom: 30%;
+	margin-top: 10%;
+	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+	width: 60%; /* Specific width is required for Firefox. */
+	background: transparent; /* Otherwise white in Chrome */
+}
+  
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	background: #ffffff;
+	cursor: pointer;
+	margin-top: -9px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+	border: 2px solid rgba(124, 144, 160, 0.8)
+}
+  
+input[type=range]:focus {
+	outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+  
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 14px;
+	cursor: pointer;
+	box-shadow: inset 0px 0px 3px .5px rgba(0,0,0,1);
+	border-radius: 50%;
+	background: white;
+	border-radius: 7px;
 }
