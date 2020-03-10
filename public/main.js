@@ -3,10 +3,24 @@
 
   window.addEventListener("load", init);
 
+  let lightOn = true;
+
   function init() { 
     id('login').addEventListener('keypress', function (e) {
         passwordEnter(e);
     });
+
+    qs('.powerButton').addEventListener('click', function () {
+      if (lightOn) {
+        qs('.light-pic').src = 'light-off.png';
+        qs('.light-pic').classList.add('scale08');
+        lightOn = !lightOn;
+      } else {
+        qs('.light-pic').src = 'light-on.png';
+        lightOn = !lightOn;
+        qs('.light-pic').classList.remove('scale08');
+      }
+    })
   }
 
   function passwordEnter(e, field) {
