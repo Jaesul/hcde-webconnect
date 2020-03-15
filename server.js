@@ -12,12 +12,14 @@ var io = socket(server);
 io.sockets.on('connection', newConnection)
 
 // On new connection log stuff 
-// for debugging and broadcast the mouse data
+// for debugging and broadcast the state data
 function newConnection(socket) {
     console.log('new connection' + socket.id);
 
-    function mouseMsg(data) {
-        socket.broadcast.emit('mouse', data);
+    socket.on('stateChange', stateChange)
+
+    function stateChange(data) {
+        socket.broadcast.emit('stateChange', data);
         console.log(data);
     }
 }

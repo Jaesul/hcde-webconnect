@@ -75,7 +75,6 @@ button:hover {
 .login-page {
   position: fixed;
 	display: flex;
-/* display: none; */
 	justify-content: center;
 	align-content: center;
 	height: 100%;
